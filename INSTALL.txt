@@ -1,0 +1,19 @@
+CompGod 1.0.0 - Windows x64 VST3 effect
+
+1. Close the DAW.
+2. Copy the complete CompGod.vst3 folder to:
+   C:\Program Files\Common Files\VST3
+   (administrator permission may be needed)
+   Or use a VST3 location your DAW is configured to scan.
+3. Rescan plugins in the DAW.
+4. Insert CompGod on an audio track, choose a preset, and adjust Threshold.
+5. Match loudness with Makeup. Use Bypass to compare.
+
+Keep the Contents subfolder inside CompGod.vst3 intact.
+
+CompGod.exe is the optional standalone version. Use its audio settings to
+choose an input and output. A DAW with the VST3 is recommended for tracks.
+
+Source, manual OCR text, controls, build instructions and validation notes
+are included. The model is inspired by the hardware manual, not measured
+against the physical hardware. There is no output limiter.

@@ -1,0 +1,10 @@
+/build/
+/build-macos/
+/tmp/
+/dist/
+/Dependencies/
+/docs/CL1B-service-manual-extracted.txt
+/docs/Manual-notes.md
+/docs/CompGod*.png
+/docs/*-validation.txt
+*.user

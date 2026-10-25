@@ -1,0 +1,24 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "macos-universal",
+      "displayName": "macOS Universal (Apple Silicon + Intel)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build-macos",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Darwin" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "11.0"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "macos-universal", "configurePreset": "macos-universal", "jobs": 4 }
+  ],
+  "testPresets": [
+    { "name": "macos-universal", "configurePreset": "macos-universal", "output": { "outputOnFailure": true } }
+  ]
+}

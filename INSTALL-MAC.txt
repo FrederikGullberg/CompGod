@@ -1,0 +1,52 @@
+CompGod 1.0.0 - macOS build kit
+Targets: macOS 11+; Apple Silicon and Intel; VST3, Audio Unit, standalone.
+
+This is SOURCE READY TO BUILD, not a precompiled Mac plugin. The source
+changes have been regression-tested on Windows. Native Mac compilation,
+Audio Unit validation and Mac UI verification must run on your Mac.
+
+FIRST BUILD
+
+1. Extract the entire CompGod-Mac-Build-Kit.zip on your Mac.
+2. Install Apple's Command Line Tools if needed:
+     xcode-select --install
+3. Install CMake 3.22+ from https://cmake.org/download/ and place CMake.app
+   in Applications, or use: brew install cmake
+4. Open Terminal, type "cd " (with a space), drag the extracted folder
+   into Terminal, and press Return. Then run:
+     bash Build-Mac.command
+
+The build kit includes JUCE 8.0.6 source. The build needs no Apple
+Developer account. Allow several minutes for both CPU architectures.
+The script builds, runs tests, renders native UI previews, verifies both
+architectures, ad-hoc signs the bundles, and creates:
+  dist/CompGod-1.0.0-macOS-Universal.zip
+
+INSTALL AFTER BUILDING
+
+Close your DAW. In the built dist/CompGod-1.0.0-macOS-Universal folder run:
+  bash Install-Mac.command
+
+The installer validates signatures, installs for the current user only,
+then runs Apple's Audio Unit validator. It writes:
+  VST3:       ~/Library/Audio/Plug-Ins/VST3/CompGod.vst3
+  Audio Unit: ~/Library/Audio/Plug-Ins/Components/CompGod.component
+  App:        ~/Applications/CompGod.app
+
+Restart the DAW and rescan. Use Audio Unit in Logic or GarageBand; use
+VST3 or Audio Unit in hosts that support those formats. If AU registration
+has not updated yet, restart the DAW or log out/in, then run:
+  auval -v aufx Cg01 CgAu
+
+Choose a preset, lower Threshold for the desired compression, and match
+volume with Makeup. For standalone audio input, allow microphone access
+when macOS asks. A DAW's microphone permission is managed by the DAW.
+
+Built bundles are ad-hoc signed for local use and are not notarized by
+Apple. Gatekeeper may require approval if you download/share a built zip.
+Use Apple's normal Privacy & Security approval flow. The scripts do not
+disable Gatekeeper or remove quarantine. Public distribution with a
+verified publisher requires Developer ID signing and notarization.
+
+If the build fails, copy the Terminal error output back to this chat.
+Full controls and model limitations are described in README.md.

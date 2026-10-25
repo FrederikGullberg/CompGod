@@ -1,0 +1,32 @@
+name: macOS Universal
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test universal VST3, AU, and standalone
+        run: bash Build-Mac.command
+      - name: Validate Audio Unit on the native runner architecture
+        run: bash dist/CompGod-1.0.0-macOS-Universal/Install-Mac.command
+      - name: Upload Mac package and UI previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: CompGod-macOS-Universal-${{ matrix.runner }}
+          path: |
+            dist/CompGod-1.0.0-macOS-Universal.zip
+            build-macos/CompGod-Mac.png
+            build-macos/CompGod-compact.png
+            build-macos/Testing/Temporary/LastTest.log
+          if-no-files-found: error
